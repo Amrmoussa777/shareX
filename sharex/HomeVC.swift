@@ -34,13 +34,13 @@ class HomeVC: UIViewController {
     }
     
     
-    func configureViewController(){
+    private func configureViewController(){
         view.backgroundColor = .systemBackground
         
         
     }
     
-    func configureCollectionView(){
+    private func configureCollectionView(){
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: LayoutBuilder.createColumnsFlowLayout(in: view, columns: 2))
         collectionView.delegate = self
@@ -51,7 +51,7 @@ class HomeVC: UIViewController {
         
     }
     
-    func configureDataSource(){
+    private func configureDataSource(){
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { (collectionView, indexpath, product) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductItemCell.cellIdentifier, for: indexpath) as! ProductItemCell
 //            cell.downloadLink = product.imageUrl
@@ -63,7 +63,7 @@ class HomeVC: UIViewController {
             
         })
     }
-    func updateItems(with products:[Product]){
+    private func updateItems(with products:[Product]){
         var snapshot = NSDiffableDataSourceSnapshot<section,Product>()
         snapshot.appendSections([.main])
         snapshot.appendItems(products)

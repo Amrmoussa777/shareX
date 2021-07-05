@@ -23,6 +23,7 @@ class ProductInfoView: UIView {
     }
     
     func configure(){
+        translatesAutoresizingMaskIntoConstraints = false
         addSubViews(symbolImageView,countLabel)
         
         symbolImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,8 +34,8 @@ class ProductInfoView: UIView {
         
         NSLayoutConstraint.activate([
             
-            symbolImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding),
-            symbolImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            symbolImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            symbolImageView.topAnchor.constraint(equalTo: self.topAnchor,constant: -padding),
             symbolImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding),
             symbolImageView.widthAnchor.constraint(equalTo: symbolImageView.heightAnchor),
             
@@ -42,7 +43,6 @@ class ProductInfoView: UIView {
             countLabel.topAnchor.constraint(equalTo: self.topAnchor,constant: -padding),
             countLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding),
             countLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: padding)
-            
             
         ])
 //        Didnt use translatesAutoresizingMaskIntoConstraints as long as it would be implemented inside stackview and wouldnt have specaial constrains

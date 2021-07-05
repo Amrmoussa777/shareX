@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BuyButton: UIButton {
+class ShareButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,19 +18,19 @@ class BuyButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(text:String,bGColor:UIColor) {
+    init(text:String,bGColor:UIColor,iconImage:UIImage? = Images.bagImage) {
         super.init(frame: .zero)
         
         setTitle(text.capitalized, for: .normal)
         backgroundColor   = bGColor
         
-        configure()
+        configure(iconImage: iconImage)
 
     }
     
-    private  func configure(){
+    private  func configure(iconImage:UIImage?){
         
-        let image = Images.bagImage
+        let image = iconImage
         setImage(image, for: .normal)
         imageView?.contentMode = .scaleAspectFit
         imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileVC: UIViewController {
+class OrdersVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,3 +28,5 @@ class ProfileVC: UIViewController {
     */
 
 }
+
+

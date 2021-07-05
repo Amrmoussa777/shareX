@@ -36,6 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().tintColor = .systemOrange
         tabbar.viewControllers = [createHomeNC(),createGroupNC(),createMessageNC(),createProfileNC()]
         
+        
         return tabbar
             
     }
@@ -44,33 +45,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let homeVC = HomeVC()
         homeVC.title = "Home"
         homeVC.tabBarItem = UITabBarItem(title: "Home", image: TabbarImages.homeTabbarItemImage, tag: 0)
+        Configurebarbutton(in: homeVC)
         
         return UINavigationController(rootViewController: homeVC)
     }
     
     func createGroupNC() -> UINavigationController {
         let groupVC = GroupsVS()
-        groupVC.title = "Group"
+        groupVC.title = "Community"
         groupVC.tabBarItem = UITabBarItem(title: "Community", image: TabbarImages.groupTabbarItemImage, tag: 1)
-        
+        Configurebarbutton(in: groupVC)
+
         return UINavigationController(rootViewController: groupVC)
         
     }
     
     func createMessageNC() -> UINavigationController {
         let messageVC = MessagesVC()
-        messageVC.title = "Messages"
+        messageVC.title = "Chat"
         messageVC.tabBarItem = UITabBarItem(title: "Chat", image: TabbarImages.chatTabbarItemImage, tag: 2)
+        Configurebarbutton(in: messageVC)
         
         return UINavigationController(rootViewController: messageVC)
     }
     
     func createProfileNC() -> UINavigationController {
-        let profileVC = ProfileVC()
-        profileVC.title = "Profile"
-        profileVC.tabBarItem = UITabBarItem(title: "Profile", image: TabbarImages.profileTabbarItemImage, tag: 3)
+        let ordersVC = OrdersVC()
+        ordersVC.title = "Orders"
+        ordersVC.tabBarItem = UITabBarItem(title: "Orders", image: TabbarImages.ordersTabbarItemImage, tag: 3)
+        Configurebarbutton(in: ordersVC)
         
-        return UINavigationController(rootViewController: profileVC)
+        return UINavigationController(rootViewController: ordersVC)
     }
   
     
@@ -83,14 +88,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             navBarAppearance.backgroundColor = .systemBackground
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.orange]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.orange]
-            
+        
             UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).standardAppearance = navBarAppearance
             UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).scrollEdgeAppearance = navBarAppearance
-            
+          
+
         }
         
       }
-    
+    private func  Configurebarbutton(in viewcontoller:UIViewController){
+        let button = UIBarButtonItem(image: TabbarImages.accountnavbaritem, style:.done, target: viewcontoller, action: #selector(viewcontoller.rightBarItemTapped))
+        button.tintColor = UIColor.lightGray
+        viewcontoller.navigationItem.rightBarButtonItem = button
+    }
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

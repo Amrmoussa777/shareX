@@ -16,10 +16,9 @@ class ProductItemCell: UICollectionViewCell {
     let productDescLabel   = ProductItemLable(textAlignment: .justified)
     let commuPriceLabel    = ProductPriceLabel(Size: 20, color: .orange)
     let indivPriceLabel    = ProductPriceLabel(Size: 16, color: .lightGray)
-    let getButton         = BuyButton(text: "get now", bGColor:.orange)
-    let favButton         = FavoriteButton()
     let productInfoView    = ProductCardView()
-    
+    let getButton         = ShareButton(text: "get now", bGColor:.orange)
+    let favButton         = FavoriteButton()
   
     
     override init(frame: CGRect) {
@@ -46,11 +45,7 @@ class ProductItemCell: UICollectionViewCell {
         contentView.layer.cornerRadius = 10
         contentView.clipsToBounds = true
         
-        
-        
         let padding:CGFloat = 5
-        
-        
         
         NSLayoutConstraint.activate([
             ProductImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
@@ -63,7 +58,7 @@ class ProductItemCell: UICollectionViewCell {
             productDescLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             productDescLabel.heightAnchor.constraint(equalToConstant: 50),
             
-            commuPriceLabel.topAnchor.constraint(equalTo: productDescLabel.bottomAnchor, constant: padding),
+            commuPriceLabel.topAnchor.constraint(equalTo: productDescLabel.bottomAnchor),
             commuPriceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             commuPriceLabel.heightAnchor.constraint(equalToConstant: 30),
             commuPriceLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.75),
@@ -76,7 +71,7 @@ class ProductItemCell: UICollectionViewCell {
             productInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             productInfoView.topAnchor.constraint(equalTo: indivPriceLabel.bottomAnchor, constant: padding),
             productInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            productInfoView.bottomAnchor.constraint(equalTo: getButton.topAnchor, constant: -padding*2),
+            productInfoView.bottomAnchor.constraint(equalTo: getButton.topAnchor, constant: -padding),
             
             getButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             getButton.bottomAnchor.constraint(equalTo:contentView.bottomAnchor, constant: -padding),
@@ -88,14 +83,12 @@ class ProductItemCell: UICollectionViewCell {
             favButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
             favButton.heightAnchor.constraint(equalToConstant: 40)
             
-            
         ])
     }
      
     func setProduct(product:Product){
         commuPriceLabel.text = String(product.price) + " EGP"
         indivPriceLabel.text = String(product.price * 1.5) + " EGP"
-//        indivPriceLabel.textAlignment = .center
         productInfoView.addDataCartView(CommuityCount: Int(product.price*20), soldCount: Int(product.price*10))
     }
     

@@ -12,6 +12,7 @@ class ProductPriceLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -24,6 +25,13 @@ class ProductPriceLabel: UILabel {
         font = UIFont.systemFont(ofSize: Size)
         textColor = color
         translatesAutoresizingMaskIntoConstraints = false 
+    }
+    
+    private func configure(){
+        font = UIFont.systemFont(ofSize: 20,weight: .bold)
+        
+        textColor = .orange
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     
