@@ -13,13 +13,15 @@ class ProductItemCell: UICollectionViewCell {
     static let cellIdentifier = "ProductItemCell"
     
     let ProductImageView   = ProductAvatar(frame: .zero)
-    let productDescLabel   = ProductItemLable(textAlignment: .justified)
+    let productDescLabel   = ProductItemLable(textAlignment: .left)
     let commuPriceLabel    = ProductPriceLabel(Size: 20, color: .orange)
     let indivPriceLabel    = ProductPriceLabel(Size: 16, color: .lightGray)
     let productInfoView    = ProductCardView()
-    let getButton         = ShareButton(text: "get now", bGColor:.orange)
+    let getButton         = ShareButton(text: "Join now", bGColor:.orange)
     let favButton         = FavoriteButton()
-  
+    
+    var buttonDelegate:getButtonDelegate?
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +32,13 @@ class ProductItemCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+//        favButton.addStateOFImage(favOrNot: false)
+    }
+   
+   
     
     private func configureCell(){
 
@@ -84,17 +93,47 @@ class ProductItemCell: UICollectionViewCell {
             favButton.heightAnchor.constraint(equalToConstant: 40)
             
         ])
+        
+        getButton.addTarget(self, action: #selector(getButtonTapped), for: .touchUpInside)
     }
-     
-    func setProduct(product:Product){
-        commuPriceLabel.text = String(product.price) + " EGP"
-        indivPriceLabel.text = String(product.price * 1.5) + " EGP"
-        productInfoView.addDataCartView(CommuityCount: Int(product.price*20), soldCount: Int(product.price*10))
+   
+    func setProduct(product:CommProduct){
+        commuPriceLabel.text = String(product.sharePrice) + " EGP"
+        indivPriceLabel.text = String(product.originalPrice) + " EGP"
+        productDescLabel.setText(text: product.name.capitalized) 
+        productInfoView.addDataCartView(CommuityCount: product.totalShares, soldCount:  product.inShares)
+        getProductImgUrls(productID: product.id)
+        favButton.configureProduct(withProduct: product.id)
+        
     }
     
-    private func downloadImage(url :String){
-        
+    private func getProductImgUrls(productID :String){
+        NetworkManager.Shared.getImagesUrlsForProduct(productID: productID) {[weak self] imgUrls in
+            guard let self  = self else {return}
+            guard imgUrls != [] else {
+                return
+            }
+            self.ProductImageView.downloadImage(fromURL: imgUrls[0])
+            
+        }
         
     }
+    @objc func getButtonTapped(){
+        buttonDelegate?.getButtonTapped(indexPath: collectionView?.indexPath(for: self))
+    }
+    
+    func configureAsOrderItem(){
+        getButton.isEnabled = false
+        getButton.backgroundColor = .blue
+        getButton.setTitle("Joined", for: .normal)
+        getButton.setImage(Images.bagImage, for: .normal)
+    }
+   
+    
+    
+}
 
+
+protocol getButtonDelegate {
+    func getButtonTapped(indexPath:IndexPath?)
 }

@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Multicultural Communities vector 6.svg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Multicultural Communities vector 6-2.svg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Multicultural Communities vector 6-1.svg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

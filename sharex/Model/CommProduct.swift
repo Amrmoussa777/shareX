@@ -9,30 +9,41 @@
 import UIKit
 
 
-struct CommProduct:Codable {
+struct CommProduct:Codable,Hashable {
+    //product ID
+    let id:String
+    
     
     // Header Data
-    let userName:String
-    let userRating:Int
-    let date:String
-    let avatarUrl:String
-  
-    //image slider
-    let images:[String]
+    let ownerID:String
+    let date:Double
     
+    //
+    let name:String
+    let descritption:String
+      
     // NO. shares
     let inShares:Int
     let totalShares:Int
     
     //share price
     let sharePrice:Double
+    let originalPrice:Double
     
     // people liked
     let likes:Int
     
+    
     //No. comments
     let CommentsCount:Int
     
+    //
+    var liked:Bool
+    
+   /*
+     mutating func getImagesLinks(){
+     NetworkManager.Shared.getimagesUrls(productID: id)
+ } */
     
     
     

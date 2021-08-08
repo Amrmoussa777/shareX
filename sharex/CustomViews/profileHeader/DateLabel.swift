@@ -23,19 +23,21 @@ class  DateLabel: UILabel {
    
     
     private func configure(){
-        textAlignment = .center
-        textColor = .lightGray
+        
         numberOfLines = 1
         font = UIFont.systemFont(ofSize: 10, weight:.medium)
         translatesAutoresizingMaskIntoConstraints = false
-        text = "datee"
+//        text = "date"
     }
     
-    func setDate(date:String){
-        
+    func setDate(date:String,alignment:NSTextAlignment = .center,textClr:UIColor = .lightGray ){
+        textColor = textClr
+        self.textAlignment = alignment
         self.text = date
-        
     }
     
+    override func setNeedsLayout() {
+        RoundCorners()
+    }
     
 }

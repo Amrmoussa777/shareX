@@ -26,18 +26,31 @@ class ImageSliderCell: UICollectionViewCell {
     }
     
     private func configure(){
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = Images.sliderImgPlaceholder
+        imageView.contentMode = .center
         imageView.tintColor = .orange
         addSubview(imageView)
         imageView.pinToSuperViewEdges(in:self)
+        backgroundColor  = .systemBackground
     }
     
+    func setImage(img:String){
+        NetworkManager.Shared.downloadImage(from: img) { img in
+            DispatchQueue.main.async {
+                
+                self.imageView.image = img
+                self.imageView.contentMode = .scaleAspectFit
+
+            }
+        }
+        
+    }
     func setImage(img:UIImage){
         DispatchQueue.main.async {
-            // You should here calling network manager for retrieving image from server .
             self.imageView.image = img
-
+            self.imageView.contentMode = .scaleAspectFit
         }
+       
     }
     
     

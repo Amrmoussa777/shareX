@@ -1,0 +1,31 @@
+
+imgUrls
+
+sharesUsers
+
+
+
+Fields:
+
+
+
+description 
+"we can share monthly subsc. of 120 EGP with only 30 EGP for share Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-​connected ."
+
+inShares
+1
+
+name
+"Netflix Subscription"
+
+originalPrice
+120
+
+ownerID
+"F90NkVSpxqOJ3WiiCYB88GIptYA2"
+
+sharePrice
+30
+
+totalShares
+4

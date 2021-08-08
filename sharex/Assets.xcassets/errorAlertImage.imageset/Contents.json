@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "FreeVector-Rocket-Vector.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "FreeVector-Rocket-Vector-2.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "FreeVector-Rocket-Vector-1.jpg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

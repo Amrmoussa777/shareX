@@ -26,6 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = createTabbar()
         window?.makeKeyAndVisible()
         
+        
     
         
         
@@ -88,6 +89,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             navBarAppearance.backgroundColor = .systemBackground
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.orange]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.orange]
+            UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = .orange
         
             UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).standardAppearance = navBarAppearance
             UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).scrollEdgeAppearance = navBarAppearance

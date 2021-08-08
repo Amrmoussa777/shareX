@@ -12,10 +12,11 @@ class CommunityCell: UICollectionViewCell {
     
     static let cellID = "communityCell"
     let cellHeader = CellHeader()
-    var imageSlider = ImageSlider(images: MockData.imageArr, withAutomaticslider: true, interval: 2.0)
+    var imageSlider = ImageSlider()
     let commProductInfo = CommunityCellInfoView()
     let CellFooter = CommCellFooter()
-    let productDesc = ProductItemLable(textAlignment: .left,NoOfLines: 0)
+    let productDesc = ProductItemLable(textAlignment: .center,NoOfLines: 0)
+    let nameLabel  = ProductItemLable(textAlignment: .center,NoOfLines: 1)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,9 +28,16 @@ class CommunityCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        imageSlider.timer.invalidate()
+        
+    }
+    
+    
+    
     private func configure(){
-      addSubViews(cellHeader,imageSlider,commProductInfo,
-                         CellFooter,productDesc)
+        addSubViews(cellHeader,imageSlider,commProductInfo,
+                    CellFooter,productDesc,nameLabel)
         
         let padding:CGFloat = 5
         
@@ -55,9 +63,15 @@ class CommunityCell: UICollectionViewCell {
             CellFooter.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             CellFooter.heightAnchor.constraint(equalToConstant: 50),
             
-            productDesc.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: -padding),
+            nameLabel.topAnchor.constraint(equalTo: commProductInfo.bottomAnchor, constant: padding),
+            nameLabel.heightAnchor.constraint(equalToConstant: 40),
+            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: padding),
+            
+            
+            productDesc.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding*2),
             productDesc.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            productDesc.topAnchor.constraint(equalTo: commProductInfo.bottomAnchor, constant: padding),
+            productDesc.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: padding),
             //productDesc.firstBaselineAnchor.constraint(equalTo: productDesc.topAnchor)
             //productDesc.bottomAnchor.constraint(equalTo: CellFooter.topAnchor,constant: -padding)
             
@@ -66,25 +80,42 @@ class CommunityCell: UICollectionViewCell {
             
         ])
         
-        
-        
-        
+        backgroundColor = .systemBackground
         
     }
     
     
-    func setHeader (avatarUrl:String,userName:String,rating:Int,date:String){
-        cellHeader.set(avatarUrl: avatarUrl, username: userName, rating: rating, date: date)
-
+    func setHeader (userID:String,date:Double){
+        NetworkManager.Shared.getUserInfo(userID: userID){ [weak self] user in
+            guard let self = self else {return}
+            self.cellHeader.set(avatarUrl: user.avatarUrl, username:user.userName, rating: user.userRating, date: date)
+            
+        }
+        
+        
+       
+        
     }
     
-    func setImagesSlider(imagesUrl:[String]){
-        //imageSlider = ImageSlider(images: MockData.imageArr, withAutomaticslider: true, interval: 2.0)
+    func setImagesSlider(productID:String){
+        NetworkManager.Shared.getImagesUrlsForProduct(productID: productID) { [weak self]imgArr in
+            guard let self = self else {return }
+            self.imageSlider.setImages(imgArr: imgArr,Animated: true,interval: 2.0)
+        }
+        CellFooter.favButton.configureProduct(withProduct: productID)
+        
     }
     
+    func setNameAndDesc(name:String,desc:String){
+        nameLabel.text = name.capitalized
+        nameLabel.configureAsHeadline()
+        productDesc.text = desc
+        
+    }
     
-    func setInfo(inGameCount:Int,totalCount:Int,shareprice:Double){
-        commProductInfo.setInfo(image: Images.commCountImage, inGame: 3, total: 5, price: 200.0)
+    func setInfo(inGameCount:Int,totalCount:Int,shareprice:Double,originalPrice:Double){
+        commProductInfo.setInfo(image: Images.commCountImage, inGame: inGameCount, total: totalCount, price: shareprice)
+        
     }
     
     

@@ -1,0 +1,6 @@
+framework module Pods_sharex {
+  umbrella header "Pods-sharex-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -35,5 +35,9 @@ class AvatarImageView: UIImageView {
         translatesAutoresizingMaskIntoConstraints = false
     }
     
+    func setImage(image:UIImage){
+        self.image = image
+    }
+    
   
 }

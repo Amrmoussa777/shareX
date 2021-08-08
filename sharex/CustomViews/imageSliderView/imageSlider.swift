@@ -13,30 +13,31 @@ class ImageSlider:UIView{
     let layout = UICollectionViewFlowLayout()
     var collectioView : UICollectionView!
     let pager = UIPageControl()
-    var imgArr:[UIImage] = []
+    var imgArr:[String] = []
     
-    var timer:Timer!
+    var timer = Timer()
     var counter = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureImageView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(images:[UIImage]) {
+    init(imgUrls:[String]) {
         super.init(frame: .zero)
-        self.imgArr = images
+        self.imgArr = imgUrls
         configureImageView()
         configurePager()
         
     }
     
-    init(images:[UIImage],withAutomaticslider automatic:Bool ,interval:Double) {
+    init(imgUrls:[String],withAutomaticslider automatic:Bool ,interval:Double) {
         super.init(frame: .zero)
-        self.imgArr = images
+        self.imgArr = imgUrls
         configureImageView()
         configurePager()
         configureAutomaticSliding(automatic: automatic, interval: interval)
@@ -70,7 +71,8 @@ class ImageSlider:UIView{
     private func configurePager(){
         
         addSubview(pager)
-        
+        pager.pageIndicatorTintColor = .systemGray5
+        pager.currentPageIndicatorTintColor = .orange
         pager.numberOfPages = imgArr.count
         pager.currentPage = 0
         
@@ -84,8 +86,7 @@ class ImageSlider:UIView{
     }
     
     private func configureAutomaticSliding(automatic:Bool ,interval:Double){
-        if automatic {
-            timer = Timer()
+        if automatic && !timer.isValid   {
             DispatchQueue.main.async {
                 self.timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(self.changeImage), userInfo: nil, repeats: true)
             }
@@ -100,6 +101,7 @@ class ImageSlider:UIView{
             self.collectioView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
             pager.currentPage = counter
             counter += 1
+            
         } else {
             counter = 0
             let index = IndexPath.init(item: counter, section: 0)
@@ -109,6 +111,15 @@ class ImageSlider:UIView{
         }
         
         
+        
+    }
+    
+    
+    func setImages(imgArr:[String],Animated:Bool = false,interval:Double = 0.0){
+        self.imgArr = imgArr
+        collectioView.reloadData()
+        configurePager()
+        configureAutomaticSliding(automatic: Animated, interval: interval)
         
     }
     
@@ -147,11 +158,12 @@ extension ImageSlider:UICollectionViewDelegate,
         return 0.0
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let witdh = scrollView.frame.width  // -            (scrollView.contentInset.left*2) when having insest left and right must be sustracted from width .
+        let witdh = scrollView.frame.width - (scrollView.contentInset.left*2)
         let index = scrollView.contentOffset.x / witdh
         let roundedIndex = round(index)
-        pager.currentPage = Int(roundedIndex)
         counter = Int(roundedIndex)
+        pager.currentPage = Int(roundedIndex)
     }
+    
     
 }
