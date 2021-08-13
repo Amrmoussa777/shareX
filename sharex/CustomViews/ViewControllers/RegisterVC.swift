@@ -402,7 +402,7 @@ extension RegisterVC{
     private func registerUserInDB(){
         //user.image = image
         let user = User(id: "", userName:  userNameFeild.text ?? "", userRating: 3,avatarUrl: "",
-                        image: userImage, email: emailFeild.text ?? "", phoneNumber: "")
+                        image: userImage, email: emailFeild.text ?? "", phoneNumber: mobileFeild.text ?? "")
         let loadingScreen = showLoadingView()
         NetworkManager.Shared.registerUserInDB(user: user, WithPAssword: passwordFeild.originalPassword) {[weak self] isSaved in
             loadingScreen.removeFromSuperview()

@@ -125,7 +125,7 @@ extension OrdersVC{
         addLoggOutObserever()
         addProductChangedObserever()
         addNewProductObserever()
-
+        addNewProduuctShareAdded()
     }
     
     func deleteObservers(){
@@ -133,6 +133,7 @@ extension OrdersVC{
         deleteLoggOutObserver()
         deleteProductChangedObserver()
         deleteNewProductObserver()
+        deleteNewProduuctShareAdded()
     }
     
     override func prductsChagned(_ notification:Notification){
@@ -189,6 +190,25 @@ extension OrdersVC{
         }
     }
     
+    override func newShareAdded(_ notification: Notification) {
+        guard let data = notification.userInfo as? [String:String] else {
+            return
+        }
+        
+        guard let productID  = data["productID"] else {
+            return
+        }
+        NetworkManager.Shared.getSingleProduct(productID: productID) {[weak self] optProduct in
+            guard let self = self else {return}
+            guard let product = optProduct else{
+                return
+            }
+            
+            self.orders.append(product)
+            self.ordersCollectionView.reloadData()
+            
+        } 
+    }
     
     
 }

@@ -146,4 +146,15 @@ extension UIViewController{
     
     @objc func prductsChagned(_ notification:Notification){}
     
+//    NEW SHARE ADDED
+    func addNewProduuctShareAdded(){
+        NotificationCenter.default.addObserver(self, selector: #selector(newShareAdded(_:)), name: .newProductShareAdded, object: nil)
+    }
+     func deleteNewProduuctShareAdded(){
+        NotificationCenter.default.removeObserver(self, name: .newProductShareAdded, object: nil)
+    }
+    
+    @objc func newShareAdded(_ notification:Notification){}
+    
+    
 }

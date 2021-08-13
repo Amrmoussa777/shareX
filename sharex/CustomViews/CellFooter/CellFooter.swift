@@ -12,7 +12,6 @@ class CommCellFooter: UIView {
     
     let getButton = ShareButton(text: "Join Now", bGColor: .orange)
     let commentButton = ShareButton(text: "Comment", bGColor: .systemGray5,iconImage: Images.commentImage)
-    let shareButton = CommCellShareButton()
     let favButton = FavoriteButton()
     
     
@@ -33,7 +32,7 @@ class CommCellFooter: UIView {
     func configure(){
         
         
-        addSubViews(getButton,commentButton,shareButton,favButton)
+        addSubViews(getButton,commentButton,favButton)
         
         let padding :CGFloat = 5
         
@@ -42,24 +41,17 @@ class CommCellFooter: UIView {
             getButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             getButton.topAnchor.constraint(equalTo: topAnchor, constant:padding),
             getButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-            getButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4),
+            getButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
            
             favButton.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             favButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             favButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
             favButton.widthAnchor.constraint(equalTo: favButton.heightAnchor),
-            
-            shareButton.trailingAnchor.constraint(equalTo: favButton.leadingAnchor, constant: -padding),
-            shareButton.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-            shareButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-            shareButton.widthAnchor.constraint(equalTo: shareButton.heightAnchor),
-            
-           
-            
+         
             commentButton.leadingAnchor.constraint(equalTo: getButton.trailingAnchor, constant: padding),
             commentButton.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             commentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-            commentButton.trailingAnchor.constraint(equalTo: shareButton.leadingAnchor,constant: -padding)
+            commentButton.trailingAnchor.constraint(equalTo: favButton.leadingAnchor,constant: -padding)
             
             
             

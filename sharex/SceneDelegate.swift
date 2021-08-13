@@ -93,16 +93,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
             UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).standardAppearance = navBarAppearance
             UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).scrollEdgeAppearance = navBarAppearance
-          
-
         }
         
       }
+    
     private func  Configurebarbutton(in viewcontoller:UIViewController){
         let button = UIBarButtonItem(image: TabbarImages.accountnavbaritem, style:.done, target: viewcontoller, action: #selector(viewcontoller.rightBarItemTapped))
         button.tintColor = UIColor.lightGray
         viewcontoller.navigationItem.rightBarButtonItem = button
     }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

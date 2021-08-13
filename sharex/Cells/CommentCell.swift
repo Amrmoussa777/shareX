@@ -101,7 +101,7 @@ extension CommentCell:commentlikedDeleagte{
             guard let comment = optComment else {
                 return
             }
-            self.cellFootter.setData(favCount: comment.favCount, userLiked: true)
+            self.cellFootter.setData(favCount: comment.favCount, userLiked: liked)
             
         }
     }

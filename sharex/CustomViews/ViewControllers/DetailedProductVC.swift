@@ -119,9 +119,12 @@ class DetailedProductVC: UIViewController {
         
         commentView.anchorWithPadding(top: commentTextAndSend.bottomAnchor, leading: scrollContentView.leadingAnchor, bottom: scrollContentView.bottomAnchor, trailing: scrollContentView.trailingAnchor, padding: UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding), size: CGSize(width: 0, height: 0))
         
-        
-        
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+    }
+    
+    @objc func keyboardWillShow(){
+        scrollToBottom()
     }
     
     private func loadData(updatedProduct:CommProduct){
@@ -199,8 +202,9 @@ extension DetailedProductVC{
                 self.view.showAlertView(avatarImage: AlertImages.topAlertImage!, Message: "Sorry we cannot update product page please try agian .", buttonLabel: "Done", buttonImage: .checkmark)
                 return
             }
-            
             self.loadData(updatedProduct: product)
+            let data:[String:String] = ["productID":product.id]
+            NotificationCenter.default.post(name: .newProductShareAdded, object: nil, userInfo: data)
         }
     }
     
@@ -236,10 +240,13 @@ extension DetailedProductVC{
     
     @objc func commecntTapped(){
         //scroll to bottom of screen .
+        scrollToBottom()
+    }
+    
+    private func scrollToBottom(){
         let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.bottom)
         scrollView.setContentOffset(bottomOffset, animated: true)
     }
-    
     
     private func configureFavButton(){
         footerArea.favButton.configureProduct(withProduct: product.id)

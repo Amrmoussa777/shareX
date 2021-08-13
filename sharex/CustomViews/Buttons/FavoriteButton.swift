@@ -50,6 +50,11 @@ class FavoriteButton: UIButton {
     }
   
     @objc func addFavProduct(){
+        guard imageView?.image == Images.notFavImage else {
+            flipIcon()
+            dislikeProduct()
+            return
+        }
         flipIcon()
         NetworkManager.Shared.addFavProduct(productID: id ?? "") { [weak self]isSaved in
             guard let self = self else {return}
@@ -62,7 +67,26 @@ class FavoriteButton: UIButton {
         }
     }
     
+    private func dislikeProduct(){
+        NetworkManager.Shared.disLikeProduct(productID: id ?? "") {[weak self] deleted in
+            guard let self = self else {return}
+            switch (deleted){
+            case false:
+                self.flipIcon()
+            case true:
+                break
+            }
+
+        }
+    }
+    
     @objc func addFavComment(){
+        guard imageView?.image == Images.notFavImage else {
+            flipIcon()
+            dislikeComment()
+            return
+        }
+
         flipIcon()
         NetworkManager.Shared.addFavComment(commentID: id ?? "", productID: productID ?? "") {[weak self] isSaved in
             guard let self = self else {return}
@@ -76,6 +100,19 @@ class FavoriteButton: UIButton {
 
     }
     
+    private func dislikeComment(){
+        NetworkManager.Shared.disLikeComment(commentID: id ?? "", productID: productID ?? "") {[weak self] deleted in
+            guard let self = self else {return}
+            switch (deleted){
+            case false:
+                self.flipIcon()
+            case true:
+                self.favCommentDelegate?.reloadCommnetFooter(commentID: self.id ?? "", productID: self.productID ?? "",liked: false)
+            }
+
+        }
+        
+    }
 //
 //    private func addTappedGesture(){
 //        addTarget(self, action: #selector(flipIcon), for: .touchUpInside)

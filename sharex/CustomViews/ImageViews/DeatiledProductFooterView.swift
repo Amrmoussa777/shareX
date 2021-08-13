@@ -12,7 +12,6 @@ class  DestailedProductFooterView: UIView {
     
     
     let commentButton = ShareButton(text: "Comment", bGColor: .systemGray5,iconImage: Images.commentImage)
-    let shareButton = CommCellShareButton()
     let favButton = FavoriteButton()
     
     override init(frame: CGRect) {
@@ -26,7 +25,7 @@ class  DestailedProductFooterView: UIView {
     
     
     private func configure(){
-        addSubViews(shareButton,commentButton,favButton)
+        addSubViews(commentButton,favButton)
         
         let padding:CGFloat = 5
         
@@ -37,15 +36,11 @@ class  DestailedProductFooterView: UIView {
             favButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
             favButton.widthAnchor.constraint(equalTo: favButton.heightAnchor),
             
-            shareButton.trailingAnchor.constraint(equalTo: favButton.leadingAnchor, constant: -padding),
-            shareButton.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-            shareButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-            shareButton.widthAnchor.constraint(equalTo: shareButton.heightAnchor),
         
             commentButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             commentButton.topAnchor.constraint(equalTo: topAnchor, constant:padding),
             commentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
-            commentButton.trailingAnchor.constraint(equalTo: shareButton.leadingAnchor, constant: -padding),
+            commentButton.trailingAnchor.constraint(equalTo: favButton.leadingAnchor, constant: -padding),
            
          
         ])

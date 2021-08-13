@@ -108,12 +108,14 @@ extension MessagesVC{
         addLoginObserever()
         addLoggOutObserever()
         addNewProductObserever()
+        addNewProduuctShareAdded()
     }
     
     func deleteObesrvers(){
         deleteLoginObserver()
         deleteLoggOutObserver()
         deleteNewProductObserver()
+        deleteNewProduuctShareAdded()
     }
     
     override func loggedIn(_ notification: Notification) {
@@ -124,6 +126,19 @@ extension MessagesVC{
         getConversations()
     }
     override func NewProductAdded(_ notification: Notification) {
+        guard let data = notification.userInfo as? [String:String] else {
+            return
+        }
+        
+        guard let productID  = data["productID"] else {
+            return
+        }
+        
+        convArr.append(productID)
+        convsCollectionView.reloadData()
+    }
+    
+    override func newShareAdded(_ notification: Notification) {
         guard let data = notification.userInfo as? [String:String] else {
             return
         }

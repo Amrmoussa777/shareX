@@ -34,8 +34,6 @@ enum Images {
     static let registerImage = UIImage(named: "registerAvatar")
     static let createNewProductAvatar = UIImage(named: "createNewProductAvatar")
     
-    
-    
     static let emailImage = UIImage(systemName: "envelope")
     static let passwordImage = UIImage(systemName: "lock.shield" )
     static let userNameImage = UIImage(systemName: "person")
@@ -47,14 +45,8 @@ enum Images {
     static let faildAndReloadImage = UIImage(systemName: "arrow.counterclockwise")
     static let dollarSign = UIImage(systemName: "dollarsign.circle")
    
-    
-    
-    
     static let nextButton = UIImage(systemName: "arrow.forward" )
     static let logOut = UIImage(systemName: "arrow.left" )
-    
-    
-    
     
     
 }
@@ -64,13 +56,7 @@ enum AlertImages{
     static let lockImage = UIImage(systemName: "lock")
     static let unlockImage = UIImage(systemName: "lock.open")
     static let registerImage = UIImage(systemName: "arrow.up.doc.fill")
-    
     static let topAlertImage = UIImage(named: "ErrorAvatar")
-    
-    
-
-    
-    
 }
 enum  alertMessages:String,Error {
     case noUserFound = "Proceeed to sign In"
@@ -154,4 +140,5 @@ extension Notification.Name{
     static let loggedIn = Notification.Name("loggedIn")
     static let loggedOut = Notification.Name("loggedOut")
     static let newProductAdded = Notification.Name("newProductAdded")
+    static let newProductShareAdded = Notification.Name("newProductShareAdded")
 }

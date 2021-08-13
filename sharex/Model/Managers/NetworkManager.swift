@@ -6,9 +6,6 @@
 //  Copyright © 2021 Amr Moussa. All rights reserved.
 //
 
-
-
-
 import UIKit
 import Firebase
 import FirebaseStorage
@@ -425,7 +422,7 @@ class NetworkManager {
             FireStoreDB.User.name:user.userName,
             FireStoreDB.User.avatarLink: user.avatarUrl,
             FireStoreDB.User.rating:user.userRating,
-            
+            FireStoreDB.User.phoneNumber:user.phoneNumber
         ]
         
         // there is no need to cretae likes collescrion as it would create a random decument wedont want and
@@ -697,6 +694,7 @@ class NetworkManager {
         
         
     }
+    
     func addFavProduct(productID:String,completed:@escaping(Bool)->()){
         if let _  = getCurrentUser(){
             // add comment is to product
@@ -740,6 +738,25 @@ class NetworkManager {
         
     }
     
+    func disLikeProduct(productID:String,completed:@escaping(Bool)->()){
+        guard let userID = getCurrentUser() else {
+            completed(false)
+            return
+        }
+        
+        let ref =  db.collection("Products/\(productID)/\(FireStoreDB.Product.likes)/")
+        ref.document(userID).delete { error in
+            if let _ = error {
+                completed(false)
+                return
+            }
+            self.productsCache[NSString(string: productID)]?.liked = false
+            self.checkProductChanged(productID: productID)
+            completed(true)
+            
+        }
+    }
+    
     func addFavComment(commentID:String,productID:String,completed:@escaping(Bool)->()){
         if let _  = getCurrentUser(){
             // add comment is to product
@@ -768,7 +785,7 @@ class NetworkManager {
         
         let ref = db.collection("Products/\(productID)/\(FireStoreDB.Product.comments)/\(commentID)/\(FireStoreDB.Comment.likes)/")
         
-        ref.document(userID).setData([:]) { [weak self]err in
+        ref.document(userID).setData([:]) { [weak self] err in
             guard let self = self else {
                 completed(false)
                 return}
@@ -781,15 +798,31 @@ class NetworkManager {
         
     }
     
-    private func increaseCommentFav(commentID:String,productID:String,completed:@escaping(Bool)->()){
+    private func increaseCommentFav(commentID:String,productID:String,incrementNumber:Int = 1,completed:@escaping(Bool)->()){
         let ref = db.document("Products/\(productID)/\(FireStoreDB.Product.comments)/\(commentID)/")
-        ref.updateData([FireStoreDB.Comment.likesCount:FieldValue.increment(Int64(1))]) { error in
+        ref.updateData([FireStoreDB.Comment.likesCount:FieldValue.increment(Int64(incrementNumber))]) { error in
             if  let _ = error {
                 completed(false)
                 return
             }
             
             completed(true)
+        }
+    }
+    
+    func disLikeComment(commentID:String,productID:String,completed:@escaping(Bool)->()){
+        guard let userID = getCurrentUser() else {
+            completed(false)
+            return
+        }
+        
+        let ref = db.collection("Products/\(productID)/\(FireStoreDB.Product.comments)/\(commentID)/\(FireStoreDB.Comment.likes)/")
+        ref.document(userID).delete { error in
+            if let _ = error {
+                completed(false)
+                return
+            }
+            self.increaseCommentFav(commentID: commentID, productID: productID, incrementNumber: -1, completed: completed)
         }
     }
     
