@@ -31,8 +31,6 @@ Sharex let you gather a team for anything . .
 
 ### ShareX
 
-![ShareX](Logo/SA-aliggnment.gif)
-
 <p align="center">
     <img src="logos/1.png" width="1000" max-width="50%" alt="SA-Alginment" />
     <img src="logos/3.png" width="1000" max-width="50%" alt="SA-Alginment" />
