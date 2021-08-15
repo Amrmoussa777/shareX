@@ -31,11 +31,11 @@ Sharex let you gather a team for anything . .
 
 ### ShareX
 
-<<<<<<< HEAD
-=======
-![ShareX]https://apps.apple.com/us/app/sharex-gather-a-team/id1580312063)
 
->>>>>>> 33c2349536a110763733510765c7fa1254596d26
+=======
+
+
+
 <p align="center">
     <img src="logos/1.png" width="1000" max-width="50%" alt="SA-Alginment" />
     <img src="logos/3.png" width="1000" max-width="50%" alt="SA-Alginment" />
