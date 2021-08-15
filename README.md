@@ -31,7 +31,7 @@ Sharex let you gather a team for anything . .
 
 ### ShareX
 
-![ShareX](Logo/SA-aliggnment.gif)
+![ShareX]https://apps.apple.com/us/app/sharex-gather-a-team/id1580312063)
 
 <p align="center">
     <img src="logos/1.png" width="1000" max-width="50%" alt="SA-Alginment" />
