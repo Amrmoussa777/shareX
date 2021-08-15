@@ -85,13 +85,14 @@ class RegisterVC: UIViewController {
         imagePicker.delegate = self
         
         imageView.image = Images.registerImage
-        
+        let imageViewHeight:CGFloat = DeviceTypes.isSmallSEAndMini ? 150:250
+
         
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 200),
+            imageView.widthAnchor.constraint(equalToConstant: imageViewHeight),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
             
             
@@ -160,7 +161,7 @@ class RegisterVC: UIViewController {
             pager.leadingAnchor.constraint(equalTo: collectioView.leadingAnchor),
             pager.trailingAnchor.constraint(equalTo: collectioView.trailingAnchor),
             pager.bottomAnchor.constraint(equalTo: collectioView.bottomAnchor),
-            pager.heightAnchor.constraint(equalToConstant: 50)
+            pager.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
@@ -307,7 +308,7 @@ extension RegisterVC{
     private func getUIViewForCpecificCell(cellindex:Int,cell:UICollectionViewCell)->([UIView],[NSLayoutConstraint],message:String){
         var views:[UIView] = []
         var constrains:[NSLayoutConstraint] = []
-        
+        let cellPaddingTop:CGFloat = DeviceTypes.isSmallSEAndMini ? 50:100
         
         //cell one
         if cellindex == 0 {
@@ -323,7 +324,7 @@ extension RegisterVC{
             
             
             let firstCellConstrains = [
-                emailFeild.topAnchor.constraint(equalTo: cell.contentView.topAnchor,constant: 100),
+                emailFeild.topAnchor.constraint(equalTo: cell.contentView.topAnchor,constant: cellPaddingTop),
                 emailFeild.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
                 emailFeild.widthAnchor.constraint(equalTo: cell.contentView.widthAnchor,constant: -padding),
                 emailFeild.heightAnchor.constraint(equalToConstant: 50),
@@ -349,7 +350,7 @@ extension RegisterVC{
         else if cellindex == 1 {
             
             let CellConstrains = [
-                imageViewButton.topAnchor.constraint(equalTo: cell.contentView.topAnchor,constant: 50),
+                imageViewButton.topAnchor.constraint(equalTo: cell.contentView.topAnchor,constant:cellPaddingTop -  50),
                 imageViewButton.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
                 imageViewButton.widthAnchor.constraint(equalToConstant: 100),
                 imageViewButton.heightAnchor.constraint(equalToConstant: 100),

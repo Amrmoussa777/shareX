@@ -50,7 +50,7 @@ class CreateNewProductCVcell: UICollectionViewCell {
             infoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             infoLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -60),
             infoLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            infoLabel.heightAnchor.constraint(equalToConstant: 50),
+            infoLabel.heightAnchor.constraint(equalToConstant: 70),
         
         ])
         

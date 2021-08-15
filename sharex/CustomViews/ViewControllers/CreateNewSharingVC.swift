@@ -74,11 +74,11 @@ class CreateNewSharingVC: UIViewController{
         registerLabel.font = UIFont.systemFont(ofSize: 40, weight: .heavy)
         registerLabel.setText(text: "New \nSharing")
         imageView.image = Images.createNewProductAvatar
-        
+        let imageHeight:CGFloat = DeviceTypes.isSmallSEAndMini ? 150:200
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.topAnchor,constant: padding),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -padding),
-            imageView.widthAnchor.constraint(equalToConstant: 200),
+            imageView.widthAnchor.constraint(equalToConstant: imageHeight),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
             
             
@@ -258,7 +258,7 @@ extension CreateNewSharingVC{
     private func firstCVSCreenConfiguration(cellindex:Int,cell:UICollectionViewCell)->([UIView],[NSLayoutConstraint],message:String){
         var views:[UIView] = []
         var constrains:[NSLayoutConstraint] = []
-        
+        let descritptionHeight:CGFloat = DeviceTypes.isSmallSEAndMini ? 100:150
         let firstCellConstrains = [
             nameTextFeild.topAnchor.constraint(equalTo: cell.contentView.topAnchor,constant: 50),
             nameTextFeild.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
@@ -268,7 +268,7 @@ extension CreateNewSharingVC{
             descTextFeild.topAnchor.constraint(equalTo: nameTextFeild.bottomAnchor,constant: padding*2),
             descTextFeild.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
             descTextFeild.widthAnchor.constraint(equalTo: cell.contentView.widthAnchor,constant: -padding),
-            descTextFeild.heightAnchor.constraint(equalToConstant: 150)
+            descTextFeild.heightAnchor.constraint(equalToConstant: descritptionHeight)
         ]
         
         views.append(nameTextFeild)
@@ -284,9 +284,10 @@ extension CreateNewSharingVC{
     private func secondCVScreenConfigure(cellindex:Int,cell:UICollectionViewCell)->([UIView],[NSLayoutConstraint],message:String){
         var views:[UIView] = []
         var constrains:[NSLayoutConstraint] = []
+        let topPadding:CGFloat = DeviceTypes.isSmallSEAndMini ? 50:100
         
         let CellConstrains = [
-            originalPrice.topAnchor.constraint(equalTo: cell.contentView.topAnchor,constant: 100),
+            originalPrice.topAnchor.constraint(equalTo: cell.contentView.topAnchor,constant: topPadding),
             originalPrice.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
             originalPrice.widthAnchor.constraint(equalTo: cell.contentView.widthAnchor,constant: -padding),
             originalPrice.heightAnchor.constraint(equalToConstant: 50),

@@ -15,8 +15,8 @@ class CommunityCell: UICollectionViewCell {
     var imageSlider = ImageSlider()
     let commProductInfo = CommunityCellInfoView()
     let CellFooter = CommCellFooter()
-    let productDesc = ProductItemLable(textAlignment: .center,NoOfLines: 0)
-    let nameLabel  = ProductItemLable(textAlignment: .center,NoOfLines: 1)
+    let productDesc = ProductItemLable(textAlignment: .left,NoOfLines: 0)
+    let nameLabel  = ProductItemLable(textAlignment: .left,NoOfLines: 1)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +40,7 @@ class CommunityCell: UICollectionViewCell {
                     CellFooter,productDesc,nameLabel)
         
         let padding:CGFloat = 5
+        let imageViewerHeight:CGFloat = DeviceTypes.isSmallSEAndMini ? 200:300
         
         NSLayoutConstraint.activate([
             cellHeader.topAnchor.constraint(equalTo: topAnchor,constant: padding),
@@ -50,7 +51,7 @@ class CommunityCell: UICollectionViewCell {
             imageSlider.topAnchor.constraint(equalTo: cellHeader.bottomAnchor, constant: padding),
             imageSlider.leadingAnchor.constraint(equalTo: leadingAnchor),
             imageSlider.widthAnchor.constraint(equalTo: widthAnchor),
-            imageSlider.heightAnchor.constraint(equalToConstant: 300),
+            imageSlider.heightAnchor.constraint(equalToConstant: imageViewerHeight),
             
             commProductInfo.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             commProductInfo.topAnchor.constraint(equalTo: imageSlider.bottomAnchor, constant: padding),
@@ -63,7 +64,7 @@ class CommunityCell: UICollectionViewCell {
             CellFooter.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             CellFooter.heightAnchor.constraint(equalToConstant: 50),
             
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: -padding),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: padding*2),
             nameLabel.topAnchor.constraint(equalTo: commProductInfo.bottomAnchor, constant: padding),
             nameLabel.heightAnchor.constraint(equalToConstant: 40),
             nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: padding),
@@ -110,7 +111,7 @@ class CommunityCell: UICollectionViewCell {
         nameLabel.text = name.capitalized
         nameLabel.configureAsHeadline()
         productDesc.text = desc
-        
+        productDesc.textColor = .secondaryLabel
     }
     
     func setInfo(inGameCount:Int,totalCount:Int,shareprice:Double,originalPrice:Double){

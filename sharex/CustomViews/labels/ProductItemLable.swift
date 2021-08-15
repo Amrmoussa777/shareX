@@ -45,8 +45,7 @@ class ProductItemLable: UILabel {
     }
     
     func configureAsHeadline(){
-        self.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
-        self.backgroundColor = .systemGray5
+        self.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
     }
     
     func configureAsProfileHeadline(){

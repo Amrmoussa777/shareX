@@ -43,7 +43,7 @@ class ResgisterCollectionViewCell: UICollectionViewCell {
         contentView.addSubViews(infoLabel)
         
         infoLabel.textColor = .tertiaryLabel
-        
+
         NSLayoutConstraint.activate([
       
             

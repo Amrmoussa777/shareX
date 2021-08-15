@@ -14,8 +14,8 @@ class ProductOverViewVC: UIViewController {
     var imageSlider = ImageSlider()
     let productInfo = CommunityCellInfoView()
     let CellFooter = CommCellFooter()
-    let productDesc = ProductItemLable(textAlignment: .center,NoOfLines: 0)
-    let nameLabel  = ProductItemLable(textAlignment: .center,NoOfLines: 1)
+    let productDesc = ProductItemLable(textAlignment: .left,NoOfLines: 0)
+    let nameLabel  = ProductItemLable(textAlignment: .left,NoOfLines: 1)
     
     var product : CommProduct!
     var delegate:viewDetailedViewProtocol?
@@ -47,6 +47,7 @@ class ProductOverViewVC: UIViewController {
                          CellFooter,productDesc,nameLabel)
         
         let padding:CGFloat = 5
+        let imageViewerHeight:CGFloat = DeviceTypes.isSmallSEAndMini ? 200:300
         
         NSLayoutConstraint.activate([
             header.topAnchor.constraint(equalTo: view.topAnchor,constant: padding),
@@ -57,7 +58,7 @@ class ProductOverViewVC: UIViewController {
             imageSlider.topAnchor.constraint(equalTo: header.bottomAnchor, constant: padding),
             imageSlider.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageSlider.widthAnchor.constraint(equalTo: view.widthAnchor),
-            imageSlider.heightAnchor.constraint(equalToConstant: 300),
+            imageSlider.heightAnchor.constraint(equalToConstant: imageViewerHeight),
             
             productInfo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             productInfo.topAnchor.constraint(equalTo: imageSlider.bottomAnchor, constant: padding),
@@ -69,7 +70,7 @@ class ProductOverViewVC: UIViewController {
             CellFooter.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             CellFooter.heightAnchor.constraint(equalToConstant: 50),
             
-            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: padding*2),
             nameLabel.topAnchor.constraint(equalTo: productInfo.bottomAnchor, constant: padding),
             nameLabel.heightAnchor.constraint(equalToConstant: 40),
             nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -130,6 +131,7 @@ class ProductOverViewVC: UIViewController {
         nameLabel.text = name.capitalized
         nameLabel.configureAsHeadline()
         productDesc.text = desc
+        productDesc.textColor = .secondaryLabel
         
     }
     

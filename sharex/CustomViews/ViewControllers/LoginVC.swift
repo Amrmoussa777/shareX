@@ -75,11 +75,12 @@ class LoginVC: UIViewController {
         
         let padding:CGFloat = 5
         let outterPadding:CGFloat = 20
+        let imageViewHeight:CGFloat = DeviceTypes.isSmallSEAndMini ? 180:250
         
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            imageView.widthAnchor.constraint(equalToConstant: 300),
+            imageView.widthAnchor.constraint(equalToConstant: imageViewHeight),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
             
             loginLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -10),
