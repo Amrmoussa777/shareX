@@ -47,7 +47,7 @@ Sharex let you gather a team for anything . .
 
 <p align="center">
     <h1>Available on app store</h1>
-    <img src="logos/appStoreImage.png" width="300" max-width="50%" alt="SA-Alginment" />
+    <img align="center" src="logos/appStoreImage.png" width="300" max-width="50%" alt="ShareX" />
 </p>
 
 
